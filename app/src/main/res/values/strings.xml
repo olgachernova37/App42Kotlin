@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Car App</string>
+    <string name="car_status_locked">Locked</string>
+    <string name="car_status_unlocked">Unlocked</string>
+    <string name="engine_status_ok">Engine OK</string>
+    <string name="engine_status_check">Check Engine</string>
+    <string name="oil_level">Oil Level: %1$d%%</string>
+    <string name="tire_pressure">Tire Pressure</string>
+    <string name="fuel_range">Range: %1$d km</string>
+    <string name="select_car">Select your car</string>
+    <string name="refresh_status">Refresh Status</string>
+</resources>
