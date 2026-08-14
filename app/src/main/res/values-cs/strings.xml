@@ -33,4 +33,11 @@
     <string name="wheel_fr">PP</string>
     <string name="wheel_rl">LZ</string>
     <string name="wheel_rr">PZ</string>
+    <string name="search_hint">Hledat auta</string>
+    <string name="no_search_results">Žádná auta nenalezena</string>
+    <string name="menu_theme">Vzhled</string>
+    <string name="theme_light">Světlý</string>
+    <string name="theme_dark">Tmavý</string>
+    <string name="menu_author">Autor</string>
+    <string name="about_author_bio">    Jsem Olha Demianyk, mám magisterský titul v oboru Softwarové inženýrství a v současnosti studuji na 42 Prague.\nZajímám se o vývoj pro Android a o auta – mám řidičský průkaz a jezdím ve Volkswagenu Golf.\nTuto aplikaci jsem vytvořila pomocí Kotlinu, Jetpack Compose a Android SDK jako praktický projekt, na kterém si zdokonaluji své dovednosti a zároveň tvořím něco pro řidiče, jako jsem já.</string>
 </resources>

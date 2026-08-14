@@ -33,4 +33,11 @@
     <string name="wheel_fr">FR</string>
     <string name="wheel_rl">RL</string>
     <string name="wheel_rr">RR</string>
+    <string name="search_hint">Search cars</string>
+    <string name="no_search_results">No cars found</string>
+    <string name="menu_theme">Theme</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="menu_author">Author</string>
+    <string name="about_author_bio">    I\'m Olha Demianyk, a Master\'s graduate in Software Engineering and a current student at 42 Prague.\nI\'m passionate about Android development and about cars — I hold a driving licence and drive a Volkswagen Golf.\nThis app was built using Kotlin, Jetpack Compose and the Android SDK, as a hands-on project to sharpen my skills while building something for drivers like me.</string>
 </resources>

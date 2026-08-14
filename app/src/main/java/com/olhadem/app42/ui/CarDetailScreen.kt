@@ -36,6 +36,7 @@ import com.olhadem.app42.R
 import com.olhadem.app42.data.Car
 import com.olhadem.app42.data.CarStatus
 import com.olhadem.app42.data.calculateServiceCondition
+import com.olhadem.app42.ui.theme.appColors
 
 /**
  * Detail screen for one car. Layout, top to bottom:
@@ -46,7 +47,8 @@ import com.olhadem.app42.data.calculateServiceCondition
  *  5. a status card - lock state and engine state
  *
  * Everything text-based comes from strings.xml, so it follows the app's
- * language setting like the rest of the screens.
+ * language setting like the rest of the screens. Colors come from
+ * appColors(), so it follows light/dark theme too.
  */
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
@@ -58,6 +60,7 @@ fun CarDetailScreen(
     modifier: Modifier = Modifier
 ) {
     val title = stringResource(car.titleRes)
+    val colors = appColors()
 
     Column(
         modifier = modifier
@@ -84,7 +87,7 @@ fun CarDetailScreen(
 
         Text(
             text = title,
-            color = Color(0xFF1F1F1F),
+            color = colors.textPrimary,
             fontSize = 24.sp,
             fontWeight = FontWeight.Medium
         )
@@ -135,7 +138,7 @@ fun CarDetailScreen(
                 icon = "🔧",
                 value = "%,d km".format(status.nextServiceKm),
                 label = stringResource(R.string.label_next_service),
-                valueColor = if (status.nextServiceKm < 1_500) Color(0xFFD32F2F) else Color(0xFF1F1F1F),
+                valueColor = if (status.nextServiceKm < 1_500) Color(0xFFD32F2F) else colors.textPrimary,
                 modifier = Modifier.weight(1f)
             )
         }
@@ -148,7 +151,7 @@ fun CarDetailScreen(
         Surface(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
-            color = Color.White,
+            color = colors.cardBackground,
             shadowElevation = 1.dp
         ) {
             Row(
@@ -177,7 +180,7 @@ fun CarDetailScreen(
         Surface(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
-            color = Color.White,
+            color = colors.cardBackground,
             shadowElevation = 1.dp
         ) {
             Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 6.dp)) {
@@ -206,7 +209,7 @@ fun CarDetailScreen(
 private fun SectionLabel(text: String) {
     Text(
         text = text,
-        color = Color(0xFF8A8A8A),
+        color = appColors().textTertiary,
         fontSize = 13.sp,
         fontWeight = FontWeight.Medium
     )
@@ -218,12 +221,13 @@ private fun StatTile(
     value: String,
     label: String,
     modifier: Modifier = Modifier,
-    valueColor: Color = Color(0xFF1F1F1F)
+    valueColor: Color = appColors().textPrimary
 ) {
+    val colors = appColors()
     Surface(
         modifier = modifier,
         shape = RoundedCornerShape(14.dp),
-        color = Color.White,
+        color = colors.cardBackground,
         shadowElevation = 1.dp
     ) {
         Column(modifier = Modifier.padding(14.dp)) {
@@ -238,7 +242,7 @@ private fun StatTile(
             Text(
                 text = label,
                 fontSize = 12.sp,
-                color = Color(0xFF8A8A8A)
+                color = colors.textTertiary
             )
         }
     }
@@ -246,11 +250,12 @@ private fun StatTile(
 
 @Composable
 private fun TireChip(label: String, bar: Double) {
+    val colors = appColors()
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
             text = label,
             fontSize = 12.sp,
-            color = Color(0xFF8A8A8A),
+            color = colors.textTertiary,
             fontWeight = FontWeight.Medium
         )
         Spacer(modifier = Modifier.height(4.dp))
@@ -258,12 +263,12 @@ private fun TireChip(label: String, bar: Double) {
             text = "%.1f".format(bar),
             fontSize = 16.sp,
             fontWeight = FontWeight.SemiBold,
-            color = Color(0xFF1F1F1F)
+            color = colors.textPrimary
         )
         Text(
             text = "bar",
             fontSize = 11.sp,
-            color = Color(0xFFB0B0B0)
+            color = colors.textFaint
         )
     }
 }

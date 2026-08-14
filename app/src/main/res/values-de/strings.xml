@@ -33,4 +33,11 @@
     <string name="wheel_fr">VR</string>
     <string name="wheel_rl">HL</string>
     <string name="wheel_rr">HR</string>
+    <string name="search_hint">Autos suchen</string>
+    <string name="no_search_results">Keine Autos gefunden</string>
+    <string name="menu_theme">Design</string>
+    <string name="theme_light">Hell</string>
+    <string name="theme_dark">Dunkel</string>
+    <string name="menu_author">Autor</string>
+    <string name="about_author_bio">    Ich bin Olha Demianyk, habe einen Master-Abschluss in Software Engineering und studiere derzeit an der 42 Prague.\nIch interessiere mich für Android-Entwicklung und Autos – ich besitze einen Führerschein und fahre einen Volkswagen Golf.\nDiese App habe ich mit Kotlin, Jetpack Compose und dem Android SDK entwickelt – ein praktisches Projekt, um meine Fähigkeiten zu vertiefen und dabei etwas für Fahrer wie mich zu entwickeln.</string>
 </resources>

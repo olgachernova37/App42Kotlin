@@ -39,16 +39,18 @@ import com.olhadem.app42.data.Car
 import com.olhadem.app42.data.CarStatus
 import com.olhadem.app42.data.ServiceCondition
 import com.olhadem.app42.data.calculateServiceCondition
+import com.olhadem.app42.ui.theme.appColors
 
 /**
  * One row in the main car list, split into two equal halves:
  * the left half is the car photo (full photo, no crop, no background),
- * the right half is a white card with the name, mileage/lock state and
+ * the right half is a card with the name, mileage/lock state and
  * condition badge.
  *
  * Everything text-based (name, lock state, condition) comes from
  * strings.xml, so switching the app language from the top-bar menu
  * updates this card too - nothing here is hardcoded in one language.
+ * Colors come from appColors(), so the card also follows light/dark theme.
  *
  * The photo uses [SharedTransitionScope.sharedElement] with the SAME key as the
  * photo in [CarDetailScreen], so when you tap a card, Compose animates that exact
@@ -67,11 +69,12 @@ fun CarCard(
 ) {
     val condition = calculateServiceCondition(status)
     val title = stringResource(car.titleRes)
+    val colors = appColors()
 
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .height(130.dp)
+            .height(148.dp)
             .padding(vertical = 6.dp)
             .clickable(onClick = onClick),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -96,13 +99,13 @@ fun CarCard(
             )
         }
 
-        // Права половина - біла картка з назвою, пробігом/замком і статусом.
+        // Права половина - картка з назвою, пробігом/замком і статусом.
         Surface(
             modifier = Modifier
                 .weight(1f)
                 .fillMaxHeight(),
             shape = RoundedCornerShape(16.dp),
-            color = Color.White,
+            color = colors.cardBackground,
             shadowElevation = 3.dp
         ) {
             Row(
@@ -113,31 +116,26 @@ fun CarCard(
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxHeight()
-                        .padding(horizontal = 16.dp, vertical = 14.dp),
+                        .padding(horizontal = 16.dp, vertical = 16.dp),
                     verticalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
                         text = title,
-                        color = Color(0xFF1F1F1F),
+                        color = colors.textPrimary,
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Medium,
                         maxLines = 2
                     )
 
-                    // Замок і пробіг - компактна "зведена" інформація, щоб не
-                    // відкривати деталі заради двох найпотрібніших цифр.
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(
-                            text = if (status.isLocked) "🔒" else "🔓",
-                            fontSize = 13.sp
-                        )
-                        Spacer(modifier = Modifier.width(6.dp))
-                        Text(
-                            text = "%,d km".format(status.mileage),
-                            color = Color(0xFF5A5A5A),
-                            fontSize = 13.sp
-                        )
-                    }
+                    // Пробіг - підписаний словом (не смайликом), щоб було
+                    // видно, що це саме за число, навіть без ознайомлення з
+                    // рештою застосунку. Слово береться з strings.xml, тому
+                    // воно теж змінюється разом з мовою застосунку.
+                    Text(
+                        text = "${stringResource(R.string.label_mileage)}: ${"%,d km".format(status.mileage)}",
+                        color = colors.textSecondary,
+                        fontSize = 13.sp
+                    )
 
                     ConditionBadge(condition = condition)
                 }
@@ -145,7 +143,7 @@ fun CarCard(
                 // Тонкий натяк, що картку можна натиснути - стрілочка праворуч.
                 Text(
                     text = "›",
-                    color = Color(0xFFB0B0B0),
+                    color = colors.textFaint,
                     fontSize = 22.sp,
                     fontWeight = FontWeight.Medium,
                     modifier = Modifier.padding(end = 10.dp)
@@ -180,7 +178,13 @@ fun ConditionBadge(condition: ServiceCondition) {
             color = color,
             fontSize = 13.sp,
             fontWeight = FontWeight.Medium,
-            maxLines = 1,
+            // maxLines = 2 (не 1) - раніше довгі слова англійською/німецькою
+            // ("Needs attention", "Ausgezeichneter Zustand") обрізались
+            // трьома крапками. Тепер їм є куди перенестись на другий рядок,
+            // а maxLines=148dp висота картки + більший вертикальний відступ
+            // дають знизу достатньо місця, щоб літери з "хвостиком" (y, g)
+            // не обрізались.
+            maxLines = 2,
             overflow = TextOverflow.Ellipsis
         )
     }
