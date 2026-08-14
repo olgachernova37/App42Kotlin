@@ -50,6 +50,8 @@ dependencies {
     // Import the Compose BOM
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
+    implementation("androidx.compose.animation:animation") // AnimatedContent for the list -> detail transition
+    implementation("androidx.appcompat:appcompat:1.7.0") // for AppCompatDelegate.setApplicationLocales (in-app language switch)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
